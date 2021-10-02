@@ -5,6 +5,7 @@ import Gallery from "./gallery";
 import Loading from "./loading";
 import GalleryImage from "./galleryImage";
 import IconButton from "./iconButton";
+import Pagination from "./pagination";
 import { Alert, AlertType } from "./alert";
 
 export {
@@ -17,4 +18,5 @@ export {
   Loading,
   GalleryImage,
   IconButton,
+  Pagination,
 };

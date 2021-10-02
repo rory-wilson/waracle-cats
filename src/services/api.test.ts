@@ -10,7 +10,7 @@ import {
 } from "./api";
 
 jest.mock("./httpClient", () => ({
-  get: jest.fn(),
+  get: jest.fn(() => Promise.resolve({ headers: {}, data: {} })),
   post: jest.fn(),
   del: jest.fn(),
 }));
@@ -33,10 +33,10 @@ describe("api", () => {
   });
 
   test("getImages calls the correct url", async () => {
-    await getImages();
+    await getImages(12, 1);
     expect(get).toHaveBeenCalled();
     expect(get).toHaveBeenCalledWith({
-      url: "https://api.thecatapi.com/v1/images?limit=12",
+      url: "https://api.thecatapi.com/v1/images?limit=12&page=1",
     });
   });
 

@@ -9,18 +9,28 @@ export interface IHttpClientPostParameters<T> {
   payload: T;
 }
 
+export interface IGetResponse<T> {
+  headers: any;
+  data: T;
+}
+
 const DEFAULT_HEADERS = {
   "x-api-key": process.env.API_KEY,
 };
 
-export function get<T>({ url }: IHttpClientGetParameters): Promise<T> {
-  return new Promise<T>((resolve, reject) => {
+export function get<T>({
+  url,
+}: IHttpClientGetParameters): Promise<IGetResponse<T>> {
+  return new Promise<IGetResponse<T>>((resolve, reject) => {
     axios
       .get(url, {
         headers: DEFAULT_HEADERS,
       })
       .then((response: any) => {
-        resolve(response.data as T);
+        resolve({
+          data: response.data as T,
+          headers: response.headers,
+        });
       })
       .catch((response: any) => {
         reject(response);

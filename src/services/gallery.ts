@@ -13,17 +13,23 @@ const getFavouriteIdForImage = (favourites, imageId): string => {
   return favourite ? favourite.id : null;
 };
 
-export const getGalleryImages = async (): Promise<GalleryImage[]> => {
+export const getGalleryImages = async (
+  pageSize: number,
+  page: number
+): Promise<{ count: number; images: GalleryImage[] }> => {
   try {
-    const images = await getImages();
+    const { count, images } = await getImages(pageSize, page);
     const votes = await getVotes();
     const favourites = await getFavourites();
 
-    return images.map((image) => ({
-      ...image,
-      voteCount: calculateVotesForImage(votes, image.id),
-      favouriteId: getFavouriteIdForImage(favourites, image.id),
-    }));
+    return {
+      count,
+      images: images.map((image) => ({
+        ...image,
+        voteCount: calculateVotesForImage(votes, image.id),
+        favouriteId: getFavouriteIdForImage(favourites, image.id),
+      })),
+    };
   } catch (e) {
     console.error(e);
     throw Error(e);
