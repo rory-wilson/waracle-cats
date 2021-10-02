@@ -8,7 +8,9 @@ export const postImage = (data: FormData): Promise<FormData> =>
   });
 
 export const getImages = (): Promise<Image[]> =>
-  get<Image[]>({ url: "https://api.thecatapi.com/v1/images" });
+  get<Image[]>({
+    url: "https://api.thecatapi.com/v1/images?limit=12",
+  });
 
 export const getFavourites = (): Promise<Favourite[]> =>
   get<Favourite[]>({

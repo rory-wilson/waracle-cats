@@ -36,7 +36,7 @@ describe("api", () => {
     await getImages();
     expect(get).toHaveBeenCalled();
     expect(get).toHaveBeenCalledWith({
-      url: "https://api.thecatapi.com/v1/images",
+      url: "https://api.thecatapi.com/v1/images?limit=12",
     });
   });
 
