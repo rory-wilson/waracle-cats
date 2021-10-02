@@ -1,10 +1,10 @@
-import React from "react"
-import { PageProps } from "gatsby"
-export default function IndexRoute(props: PageProps) {
+import React from "react";
+import { Layout, Gallery } from "../components";
+
+export default () => {
   return (
-    <>
-      <h1>Path:</h1>
-     <p>Hello World</p>
-    </>
-  )
-}
+    <Layout title="Gallery">
+      <Gallery />
+    </Layout>
+  );
+};
